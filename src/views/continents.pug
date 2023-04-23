@@ -1,0 +1,18 @@
+extends layout.pug
+
+block head
+  link(rel="stylesheet", href="/cities.css")
+
+block content
+  h2 Continents
+  table
+    thead
+      th №
+      th Name
+
+    tbody
+      each row, i in rows
+        tr
+          td.fit #{i+1}
+          td.fit
+            a(href=`/countries/continent/${row.Continent}`) #{row.Continent}

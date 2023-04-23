@@ -1,4 +1,42 @@
 extends layout.pug
 
 block content
-  h2 Hello world!
+  div.container-fluid.background-image
+    div.row.justify-content-center.align-items-center.h-100
+      div.col-sm-6.col-md-4
+        div.card
+          div.card-body
+            ul.nav.nav-tabs
+              li.nav-item
+                a.nav-link.active(href="#login", data-toggle="tab") Login
+              li.nav-item
+                a.nav-link(href="#signin", data-toggle="tab") Sign In
+            div.tab-content
+              div.tab-pane.fade.show.active(id="login")
+                h5.card-title.text-center Login
+                form(action="/login", method="POST")
+                  div.form-group
+                    label(for="email") Email address
+                    input(type="email", class="form-control", id="email", name="email", aria-describedby="emailHelp", placeholder="Enter email", required)
+                    small.form-text.text-muted(id="emailHelp") We'll never share your email with anyone else.
+                  div.form-group
+                    label(for="password") Password
+                    input(type="password", class="form-control", id="password", name="password", placeholder="Password", required)
+                  button(type="submit", class="btn btn-primary btn-block mt-3") Login
+              div.tab-pane.fade(id="signin")
+                h5.card-title.text-center Sign In
+                form(action="/signin", method="POST")
+                  div.form-group
+                    label(for="name") Full Name
+                    input(type="text", class="form-control", id="name", name="name", placeholder="Enter full name", required)
+                  div.form-group
+                    label(for="email") Email address
+                    input(type="email", class="form-control", id="email", name="email", aria-describedby="emailHelp", placeholder="Enter email", required)
+                    small.form-text.text-muted(id="emailHelp") We'll never share your email with anyone else.
+                  div.form-group
+                    label(for="password") Password
+                    input(type="password", class="form-control", id="password", name="password", placeholder="Password", required)
+                  div.form-group
+                    label(for="confirm-password") Confirm Password
+                    input(type="password", class="form-control", id="confirm-password", name="confirm-password", placeholder="Confirm Password", required)
+                  button(type="submit", class="btn btn-primary btn-block mt-3") Sign In

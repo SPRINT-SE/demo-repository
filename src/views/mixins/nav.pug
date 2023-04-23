@@ -1,6 +1,24 @@
 mixin navigation
-  nav
-    a(href="/")
-      b My Website
-    a(href="/cities") Cities
-    a(href="/about") About 
+  <nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropbtn">Countries &#8659;</a>
+      <div class="dropdown-content">
+        <a href="/countries">World</a>
+        <a href="/continents">Continent</a>
+        <a href="/regions">Region</a>
+      </div>
+    </li>
+    <li><a href="/cities">Cities &#8659;</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropbtn">Capital Cities &#8659;</a>
+      <div class="dropdown-content">
+        <a href="/capital_cities">World</a>
+        <a href="/continent_of_capital">Continent</a>
+        <a href="/regions">Region</a>
+      </div>
+    </li>
+    <li><a href="/about">About</a></li>
+  </ul>
+</nav>

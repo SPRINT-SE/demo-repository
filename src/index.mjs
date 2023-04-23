@@ -24,19 +24,68 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// Sample API route
-app.get("/ping", (req, res) => {
-  res.send("pong");
+app.get("/continents", async (req, res) => {
+  const [rows, fields] = await db.getContinents();
+  return res.render("continents", {rows, fields});
 });
 
-// Landing route
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/regions", async (req, res) => {
+  const [rows, fields] = await db.getRegions();
+  return res.render("regions", {rows, fields});
 });
 
-// Gallery route
-app.get("/gallery", (req, res) => {
-  res.render("gallery");
+app.get("/countries", async (req, res) => {
+  const [rows,fields] = await db.getCountriesWorld();
+  return res.render("countries", {rows, fields});
+});
+
+app.get("/countries/:code", async (req, res) => {
+  const code = req.params.code;
+  const [rows,fields] = await db.getCountry(code);
+  return res.render("countries", {rows, fields});
+});
+
+app.get("/countries/continent/:name", async (req, res) => {
+  const continentName = req.params.name;
+  const [rows, fields] = await db.getCountriesContinent(continentName);
+  return res.render("countries", {rows, fields});
+});
+
+app.get("/countries/region/:name", async (req, res) => {
+  const regionName = req.params.name;
+  const [rows, fields] = await db.getCountriesRegion(regionName);
+  return res.render("countries", {rows, fields});
+});
+
+app.get("/countries/continent/:name/:limit", async (req, res) => {
+  const continentName = req.params.name;
+  const limit = req.params.limit;
+  const [rows, fields] = await db.getCountriesContinentLimit(continentName, limit);
+  return res.render("countries", {rows, fields});
+});
+
+app.get("/countries/region/:name/:limit", async (req, res) => {
+  const regionName = req.params.name;
+  const limit = req.params.limit;
+  const [rows, fields] = await db.getCountriesRegionLimit(regionName, limit);
+  return res.render("countries", {rows, fields});
+});
+// Capital_cities route
+app.get("/capital_cities", async (req, res) => {
+  const [rows,fields] = await db.getcapital_cities();
+  return res.render("capital_cities", {rows, fields});
+});
+// continent of Capital_cities route
+app.get("/continent_of_capital", async (req, res) => {
+  const continentName = req.params.name;
+  const [rows, fields] = await db.getcapital_citiesContinent(continentName);
+  return res.render("continent_of_capital", {rows, fields});
+});
+// /capital_cities/continent of Capital_cities route
+app.get("/capital_cities/continent_of_capital/:name/:limit", async (req, res) => {
+  const continentName = req.params.name;
+  const [rows, fields] = await db. getcapital_citiesContinentLimit(continentName);
+  return res.render("capital_cities", {rows, fields});
 });
 
 // About route
@@ -67,22 +116,7 @@ app.post('/cities/:id', async (req, res) => {
   `
   await conn.execute(sql);
   return res.redirect(`/cities/${cityId}`);
-})
-
-// Returns JSON array of cities
-app.get("/api/cities", async (req, res) => {
-  const [rows, fields] = await db.getCities();
-  return res.send(rows);
 });
-
-app.get("/api/countries", async (req, res) => {
-  const countries = await db.getCountries();
-  res.send(countries);
-});
-
-
-
-
 
 // Run server!
 app.listen(port, () => {
