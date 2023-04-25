@@ -4,24 +4,24 @@ block head
   link(rel="stylesheet", href="/cities.css")
 
 block content
-  h2 Capital Cities 
-  table
-    thead
-      th Name
-      th Capital City 
-      th Continent
-      th Region
-      th Population 
-      
-      
-    tbody
-      each row, i in rows
-        tr
-          td.fit #{row.Name}
-          td.fit #{row.Capital}
-          td #{row.Continent}
-          
-          td.fit #{row.Region}
-          - const population = new Intl.NumberFormat().format(row.Population);
-          td.fit.number #{population}
-          
+  .container
+    .row
+      .col-12
+        h2.text-center Capital Cities
+        table.table.table-striped.table-hover
+          thead
+            tr
+              th Name
+              th Capital City
+              th Continent
+              th Region
+              th Population
+          tbody
+            each row in rows
+              tr
+                td.fit= row.Name
+                td.fit= row.Capital
+                td= row.Continent
+                td.fit= row.Region
+                - const population = new Intl.NumberFormat().format(row.Population);
+                td.fit.text-end= population

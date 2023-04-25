@@ -4,19 +4,39 @@ block head
   link(rel="stylesheet", href="/cities.css")
 
 block content
-  h2 Cities
-  table
-    thead
-      th ID
-      th.text-center Country
-      th City
-      th Population
-    tbody
-      each row, i in rows
+  .container
+    h1(class="title") Cities of the World
+    table(class="table is-striped is-bordered is-hoverable is-fullwidth")
+      thead
         tr
-          td.fit
-            a(href=`/cities/${i + 1}`) #{i + 1}
-          td.fit #{row.CountryCode}
-          td #{row.Name}
-          - const population = new Intl.NumberFormat().format(row.Population);
-          td.fit.number #{population}
+          th(class="has-text-centered") ID
+          th(class="has-text-centered") Country
+          th(class="has-text-centered") City
+          th(class="has-text-centered") Population
+      tbody
+        each row, i in rows
+          tr
+            td(class="has-text-centered") 
+              a(href=`/cities/${i + 1}`) #{i + 1}
+            td(class="has-text-centered") 
+              img(src=`https://www.countryflags.io/${row.CountryCode}/flat/64.png`)
+              span(class="ml-2") #{row.CountryName}
+            td 
+              a(href=`/cities/${i + 1}`) #{row.Name}
+            - const population = new Intl.NumberFormat().format(row.Population);
+            td(class="has-text-right") #{population}
+    .pagination
+      ul(class="pagination-list")
+        if currentPage > 1
+          li
+            a(href=`/cities?page=${currentPage - 1}`) Previous
+        each page in pages
+          if page === currentPage
+            li
+              a(class="pagination-link is-current") #{page}
+          else
+            li
+              a(href=`/cities?page=${page}` class="pagination-link") #{page}
+        if currentPage < totalPages
+          li
+            a(href=`/cities?page=${currentPage + 1}`) Next
