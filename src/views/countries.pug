@@ -14,11 +14,13 @@ block content
       th Population
       th Capital
     tbody
-      each row, i in rows
+      each row in rows
         tr
           td.fit
-            a(href=`/cities/${i + 1}`) #{i + 1}
-          td.fit #{row.CountryCode}
-          td #{row.Name}
+            a(href=`/countries/${row.Code}`) #{row.Code}
+          td.fit #{row.Name}
+          td #{row.Continent}
+          td #{row.Region}
           - const population = new Intl.NumberFormat().format(row.Population);
           td.fit.number #{population}
+          td #{row.Capital}

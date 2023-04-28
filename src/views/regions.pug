@@ -4,10 +4,10 @@ block head
   link(rel="stylesheet", href="/cities.css")
 
 block content
-  h2 Continents
+  h2 Regions
   table
     thead
-      th number
+      th region_number
       th Name
 
     tbody
@@ -15,4 +15,4 @@ block content
         tr
           td.fit #{i+1}
           td.fit
-            a(href=`/countries/continent/${row.Continent}`) #{row.Continent}
+            a(href=`/countries/region/${row.Region}`) #{row.Region}
